@@ -12,13 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 import java.net.URISyntaxException;
 
 @RestController
-@RequestMapping("/api/cep")
+@RequestMapping("api/v1/cep")
 @CrossOrigin("*")
 @RequiredArgsConstructor
 public class CepController implements CepControllerSwagger {
 
     private final CepIntegration cepIntegration;
-
 
     @Override
     @GetMapping("/{cep}")
