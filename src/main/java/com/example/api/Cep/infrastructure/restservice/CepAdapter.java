@@ -36,16 +36,20 @@ public class CepAdapter implements CepPort {
     public CepModel findByCep(String validCep) throws URISyntaxException {
 
         var uri = new URI(this.viacep_URL + validCep + this.viacep_response_PREFIX);
+        log.info("URI criada com sucesso! - {}", uri);
 
-        var res = restTemplate.exchange(
+        var req = restTemplate.exchange(
                 uri,
                 HttpMethod.GET,
                 null,
                 CepInput.class
-        ).getBody();
+        );
+        var res = req.getBody();
 
+        log.info("Requisição enviada, status da resposta - {}", req.getStatusCode());
         if ((res == null) || (res.getCep() == null))return null;
 
+        log.info("Endereço retornado com sucesso!");
         return CepConverter.inputToModel(res);
     }
 }
