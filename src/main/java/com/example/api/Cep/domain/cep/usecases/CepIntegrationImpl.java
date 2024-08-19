@@ -35,6 +35,11 @@ public class CepIntegrationImpl implements CepIntegration{
 
     @Override
     public String validateCepFormat(String cep) {
+        if((cep.length() < 8 || cep.length() > 9)
+                || (cep.length() == 8 && cep.contains("-"))){
+            return null;
+        }
+
         return cep;
     }
 }
