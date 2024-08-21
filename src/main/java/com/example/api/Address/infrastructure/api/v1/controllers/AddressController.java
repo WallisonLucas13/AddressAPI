@@ -1,9 +1,9 @@
-package com.example.api.Cep.infrastructure.api.v1.controllers;
+package com.example.api.Address.infrastructure.api.v1.controllers;
 
-import com.example.api.Cep.domain.cep.usecases.AddressIntegration;
-import com.example.api.Cep.infrastructure.api.v1.controllers.doc.AddressControllerSwagger;
-import com.example.api.Cep.infrastructure.api.v1.exceptions.CepFormatInvalidException;
-import com.example.api.Cep.infrastructure.api.v1.exceptions.AddressNotFoundException;
+import com.example.api.Address.domain.address.usecases.AddressIntegration;
+import com.example.api.Address.infrastructure.api.v1.controllers.doc.AddressControllerSwagger;
+import com.example.api.Address.infrastructure.api.v1.exceptions.CepFormatInvalidException;
+import com.example.api.Address.infrastructure.api.v1.exceptions.AddressNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +20,8 @@ public class AddressController implements AddressControllerSwagger {
     private final AddressIntegration addressIntegration;
 
     @Override
-    @GetMapping("/{cep}")
-    public ResponseEntity<Object> findAddressByCep(@PathVariable("cep") String cep) throws URISyntaxException {
+    @GetMapping("/{address}")
+    public ResponseEntity<Object> findAddressByCep(@PathVariable("address") String cep) throws URISyntaxException {
         try{
             return ResponseEntity.ok(addressIntegration.findAddressByCep(cep));
         }

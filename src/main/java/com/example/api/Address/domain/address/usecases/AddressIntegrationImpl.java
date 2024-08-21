@@ -1,9 +1,9 @@
-package com.example.api.Cep.domain.cep.usecases;
+package com.example.api.Address.domain.address.usecases;
 
-import com.example.api.Cep.domain.cep.models.AddressModel;
-import com.example.api.Cep.domain.cep.ports.AddressPort;
-import com.example.api.Cep.infrastructure.api.v1.exceptions.CepFormatInvalidException;
-import com.example.api.Cep.infrastructure.api.v1.exceptions.AddressNotFoundException;
+import com.example.api.Address.domain.address.models.AddressModel;
+import com.example.api.Address.domain.address.ports.AddressPort;
+import com.example.api.Address.infrastructure.api.v1.exceptions.CepFormatInvalidException;
+import com.example.api.Address.infrastructure.api.v1.exceptions.AddressNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

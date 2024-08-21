@@ -1,6 +1,6 @@
 package steps;
 
-import com.example.api.Cep.domain.cep.inputs.AddressInput;
+import com.example.api.Address.domain.address.inputs.AddressInput;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -68,7 +68,7 @@ public class AddressStep {
         Assertions.assertNull(this.response.getBody());
     }
 
-    @Then("o end point deve retornar status NOT_FOUND ao passar cep que não existe")
+    @Then("o end point deve retornar status NOT_FOUND ao buscar por cep inexistente")
     public void recebo_um_not_found() {
         Assertions.assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
         Assertions.assertNull(this.response.getBody());

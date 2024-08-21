@@ -1,7 +1,7 @@
-package com.example.api.Cep.domain.cep.converters;
+package com.example.api.Address.domain.address.converters;
 
-import com.example.api.Cep.domain.cep.inputs.AddressInput;
-import com.example.api.Cep.domain.cep.models.AddressModel;
+import com.example.api.Address.domain.address.inputs.AddressInput;
+import com.example.api.Address.domain.address.models.AddressModel;
 
 public final class AddressConverter {
 

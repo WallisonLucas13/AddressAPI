@@ -1,6 +1,6 @@
-package com.example.api.Cep.domain.cep.ports;
+package com.example.api.Address.domain.address.ports;
 
-import com.example.api.Cep.domain.cep.models.AddressModel;
+import com.example.api.Address.domain.address.models.AddressModel;
 
 import java.net.URISyntaxException;
 
@@ -10,7 +10,7 @@ import java.net.URISyntaxException;
 public interface AddressPort {
 
     /**
-     * Método para buscar o endereço pelo cep
+     * Método para buscar o endereço pelo address
      * @param cep valor a ser utilizado para encontrar o endereço
      * @return objeto com o endereço completo
      */

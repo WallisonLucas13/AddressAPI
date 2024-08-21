@@ -1,4 +1,4 @@
-package com.example.api.Cep.domain.cep.inputs;
+package com.example.api.Address.domain.address.inputs;
 
 import lombok.Builder;
 import lombok.Data;

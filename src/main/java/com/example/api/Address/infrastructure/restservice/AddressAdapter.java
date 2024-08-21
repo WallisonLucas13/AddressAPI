@@ -1,9 +1,9 @@
-package com.example.api.Cep.infrastructure.restservice;
+package com.example.api.Address.infrastructure.restservice;
 
-import com.example.api.Cep.domain.cep.converters.AddressConverter;
-import com.example.api.Cep.domain.cep.inputs.AddressInput;
-import com.example.api.Cep.domain.cep.models.AddressModel;
-import com.example.api.Cep.domain.cep.ports.AddressPort;
+import com.example.api.Address.domain.address.converters.AddressConverter;
+import com.example.api.Address.domain.address.inputs.AddressInput;
+import com.example.api.Address.domain.address.models.AddressModel;
+import com.example.api.Address.domain.address.ports.AddressPort;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;

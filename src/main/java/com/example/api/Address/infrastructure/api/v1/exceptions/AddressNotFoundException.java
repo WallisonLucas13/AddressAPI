@@ -1,4 +1,4 @@
-package com.example.api.Cep.infrastructure.api.v1.exceptions;
+package com.example.api.Address.infrastructure.api.v1.exceptions;
 
 public class AddressNotFoundException extends RuntimeException{
 
