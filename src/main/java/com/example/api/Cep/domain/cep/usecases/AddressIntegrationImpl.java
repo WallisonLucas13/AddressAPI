@@ -1,9 +1,9 @@
 package com.example.api.Cep.domain.cep.usecases;
 
-import com.example.api.Cep.domain.cep.models.CepModel;
-import com.example.api.Cep.domain.cep.ports.CepPort;
+import com.example.api.Cep.domain.cep.models.AddressModel;
+import com.example.api.Cep.domain.cep.ports.AddressPort;
 import com.example.api.Cep.infrastructure.api.v1.exceptions.CepFormatInvalidException;
-import com.example.api.Cep.infrastructure.api.v1.exceptions.CepNotFoundException;
+import com.example.api.Cep.infrastructure.api.v1.exceptions.AddressNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -11,12 +11,12 @@ import java.net.URISyntaxException;
 
 @RequiredArgsConstructor
 @Component
-public class CepIntegrationImpl implements CepIntegration{
+public class AddressIntegrationImpl implements AddressIntegration {
 
-    private final CepPort cepPort;
+    private final AddressPort addressPort;
 
     @Override
-    public CepModel findEnderecoByCep(String cep) throws URISyntaxException, CepNotFoundException, CepFormatInvalidException{
+    public AddressModel findAddressByCep(String cep) throws URISyntaxException, AddressNotFoundException, CepFormatInvalidException{
 
         String validCep = validateCepFormat(cep);
 
@@ -26,11 +26,11 @@ public class CepIntegrationImpl implements CepIntegration{
                     "\n> 99999-999 or 99999999"
             );
 
-        CepModel model = cepPort.findByCep(validateCepFormat(cep));
+        AddressModel model = addressPort.findAddressByCep(validateCepFormat(cep));
 
-        if(model == null) throw new CepNotFoundException("zip code not found, check the amount sent!");
+        if(model == null) throw new AddressNotFoundException("zip code not found, check the amount sent!");
 
-        return cepPort.findByCep(validateCepFormat(cep));
+        return addressPort.findAddressByCep(validateCepFormat(cep));
     }
 
     @Override

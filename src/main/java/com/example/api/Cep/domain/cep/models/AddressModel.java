@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class CepModel {
+public class AddressModel {
 
     private String cep;
     private String logradouro;

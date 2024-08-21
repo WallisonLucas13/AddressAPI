@@ -1,12 +1,10 @@
 package steps;
 
-import com.example.api.Cep.domain.cep.inputs.CepInput;
-import com.example.api.Cep.domain.cep.models.CepModel;
+import com.example.api.Cep.domain.cep.inputs.AddressInput;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import lombok.extern.log4j.Log4j;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Assertions;
 import org.springframework.http.HttpMethod;
@@ -17,10 +15,9 @@ import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Optional;
 
 @Log4j2
-public class CepStep {
+public class AddressStep {
 
     private RestTemplate restTemplate;
 
@@ -28,11 +25,11 @@ public class CepStep {
 
     private String cep;
 
-    private ResponseEntity<CepInput> response;
+    private ResponseEntity<AddressInput> response;
 
     @Before
     public void before(){
-        this.restTemplate =  new RestTemplate();
+        this.restTemplate = new RestTemplate();
     }
 
     @Given("que faço uma consulta GET a url: {string}")
@@ -50,7 +47,7 @@ public class CepStep {
                     uri,
                     HttpMethod.GET,
                     null,
-                    CepInput.class
+                    AddressInput.class
             );
         }catch(HttpClientErrorException e){
             this.response = ResponseEntity.status(e.getStatusCode()).build();

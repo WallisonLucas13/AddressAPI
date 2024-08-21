@@ -1,9 +1,9 @@
 package com.example.api.Cep.infrastructure.restservice;
 
-import com.example.api.Cep.domain.cep.converters.CepConverter;
-import com.example.api.Cep.domain.cep.inputs.CepInput;
-import com.example.api.Cep.domain.cep.models.CepModel;
-import com.example.api.Cep.domain.cep.ports.CepPort;
+import com.example.api.Cep.domain.cep.converters.AddressConverter;
+import com.example.api.Cep.domain.cep.inputs.AddressInput;
+import com.example.api.Cep.domain.cep.models.AddressModel;
+import com.example.api.Cep.domain.cep.ports.AddressPort;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
@@ -15,7 +15,7 @@ import java.net.URISyntaxException;
 
 @Slf4j
 @Component
-public class CepAdapter implements CepPort {
+public class AddressAdapter implements AddressPort {
 
     private final String viacep_URL;
 
@@ -23,9 +23,9 @@ public class CepAdapter implements CepPort {
 
     private final RestTemplate restTemplate;
 
-    public CepAdapter(@Value("${api.viacep.url}") String viacep_URL,
-                      @Value("${api.viacep.response.format.prefix}") String viacep_response_PREFIX,
-                      RestTemplate restTemplate){
+    public AddressAdapter(@Value("${api.viacep.url}") String viacep_URL,
+                          @Value("${api.viacep.response.format.prefix}") String viacep_response_PREFIX,
+                          RestTemplate restTemplate){
 
         this.viacep_URL = viacep_URL;
         this.viacep_response_PREFIX = viacep_response_PREFIX;
@@ -33,7 +33,7 @@ public class CepAdapter implements CepPort {
     }
 
     @Override
-    public CepModel findByCep(String validCep) throws URISyntaxException {
+    public AddressModel findAddressByCep(String validCep) throws URISyntaxException {
 
         var uri = new URI(this.viacep_URL + validCep + this.viacep_response_PREFIX);
         log.info("URI criada com sucesso! - {}", uri);
@@ -42,7 +42,7 @@ public class CepAdapter implements CepPort {
                 uri,
                 HttpMethod.GET,
                 null,
-                CepInput.class
+                AddressInput.class
         );
         var res = req.getBody();
 
@@ -50,6 +50,6 @@ public class CepAdapter implements CepPort {
         if ((res == null) || (res.getCep() == null))return null;
 
         log.info("Endereço retornado com sucesso!");
-        return CepConverter.inputToModel(res);
+        return AddressConverter.inputToModel(res);
     }
 }
