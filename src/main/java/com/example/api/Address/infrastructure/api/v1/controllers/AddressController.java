@@ -13,7 +13,6 @@ import java.net.URISyntaxException;
 
 @RestController
 @RequestMapping("api/v1/address")
-@CrossOrigin(origins = "http://localhost:8083/*")
 @RequiredArgsConstructor
 public class AddressController implements AddressControllerSwagger {
 
