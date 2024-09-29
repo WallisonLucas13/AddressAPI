@@ -13,23 +13,15 @@ import java.net.URISyntaxException;
 
 @RestController
 @RequestMapping("api/v1/address")
-@CrossOrigin(origins = "http://localhost/")
+@CrossOrigin(origins = "http://localhost:8083/*")
 @RequiredArgsConstructor
 public class AddressController implements AddressControllerSwagger {
 
     private final AddressIntegration addressIntegration;
 
     @Override
-    @GetMapping("/{address}")
-    public ResponseEntity<Object> findAddressByCep(@PathVariable("address") String cep) throws URISyntaxException {
-        try{
-            return ResponseEntity.ok(addressIntegration.findAddressByCep(cep));
-        }
-        catch(CepFormatInvalidException e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
-        catch(AddressNotFoundException e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-        }
+    @GetMapping("/{cep}")
+    public ResponseEntity<Object> findAddressByCep(@PathVariable("cep") final String cep) throws URISyntaxException {
+        return ResponseEntity.ok(addressIntegration.findAddressByCep(cep));
     }
 }

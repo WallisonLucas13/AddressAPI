@@ -4,10 +4,13 @@ import com.example.api.Address.domain.address.converters.AddressConverter;
 import com.example.api.Address.domain.address.inputs.AddressInput;
 import com.example.api.Address.domain.address.models.AddressModel;
 import com.example.api.Address.domain.address.ports.AddressPort;
+import com.example.api.Address.infrastructure.api.v1.exceptions.AddressNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
@@ -17,39 +20,36 @@ import java.net.URISyntaxException;
 @Component
 public class AddressAdapter implements AddressPort {
 
-    private final String viacep_URL;
+    private final String VIACEP_URL;
 
-    private final String viacep_response_PREFIX;
+    private static final String VIACEP_RESPONSE_PREFIX = "/json/";
 
     private final RestTemplate restTemplate;
 
-    public AddressAdapter(@Value("${api.viacep.url}") String viacep_URL,
-                          @Value("${api.viacep.response.format.prefix}") String viacep_response_PREFIX,
-                          RestTemplate restTemplate){
+    public AddressAdapter(@Value("${api.viacep.url}") final String VIACEP_URL,
+                          final RestTemplate restTemplate){
 
-        this.viacep_URL = viacep_URL;
-        this.viacep_response_PREFIX = viacep_response_PREFIX;
+        this.VIACEP_URL = VIACEP_URL;
         this.restTemplate = restTemplate;
     }
 
     @Override
     public AddressModel findAddressByCep(String validCep) throws URISyntaxException {
-
-        var uri = new URI(this.viacep_URL + validCep + this.viacep_response_PREFIX);
-        log.info("URI criada com sucesso! - {}", uri);
-
-        var req = restTemplate.exchange(
+        var uri = new URI(String.format("%s%s%s", VIACEP_URL, validCep, VIACEP_RESPONSE_PREFIX));
+        AddressInput response = restTemplate.exchange(
                 uri,
                 HttpMethod.GET,
                 null,
                 AddressInput.class
-        );
-        var res = req.getBody();
 
-        log.info("Requisição enviada, status da resposta - {}", req.getStatusCode());
-        if ((res == null) || (res.getCep() == null))return null;
+        ).getBody();
+
+        if ((response == null) || (response.getCep() == null)){
+            throw new AddressNotFoundException(HttpStatus.NOT_FOUND,
+                    "zip code not found, check the amount sent!");
+        }
 
         log.info("Endereço retornado com sucesso!");
-        return AddressConverter.inputToModel(res);
+        return AddressConverter.inputToModel(response);
     }
 }

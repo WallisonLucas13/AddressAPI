@@ -17,11 +17,4 @@ public interface AddressIntegration {
      * @return
      */
     AddressModel findAddressByCep(String cep) throws URISyntaxException, CepFormatInvalidException, AddressNotFoundException;
-
-    /**
-     * Verifica se o address está no formato válido
-     * @param cep
-     * @return
-     */
-    String validateCepFormat(String cep);
 }
