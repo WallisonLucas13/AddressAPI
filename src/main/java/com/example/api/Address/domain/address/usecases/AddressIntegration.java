@@ -14,7 +14,7 @@ public interface AddressIntegration {
     /**
      *
      * @param cep
-     * @return
+     * @return AddressModel objeto que contem as informações de endereço.
      */
-    AddressModel findAddressByCep(String cep) throws URISyntaxException, CepFormatInvalidException, AddressNotFoundException;
+    AddressModel findAddressByCep(String cep) throws URISyntaxException;
 }

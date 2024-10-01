@@ -17,17 +17,17 @@ public class AddressIntegrationImpl implements AddressIntegration {
     private final AddressPort addressPort;
 
     @Override
-    public AddressModel findAddressByCep(String cep) throws URISyntaxException {
+    public AddressModel findAddressByCep(final String cep) throws URISyntaxException {
         validateCepFormat(cep);
         return addressPort.findAddressByCep(cep);
     }
 
-    private void validateCepFormat(String cep) {
+    private void validateCepFormat(final String cep) {
         if((cep.length() < 8 || cep.length() > 9)
                 || (cep.length() == 8 && cep.contains("-"))){
 
             throw new CepFormatInvalidException(HttpStatus.BAD_REQUEST,
-                    "The zip code is in an invalid format"
+                    "O Cep informado está no formato incorreto."
             );
         }
     }
